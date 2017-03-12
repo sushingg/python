@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-# Foundations of Python Network Programming, Third Edition
-# https://github.com/brandon-rhodes/fopnp/blob/m/py3/chapter02/udp_local.py
-# UDP client and server on localhost
+# suShinGG
+# https://github.com/sushingg/python/blob/master/work/udp_chat.py
+# UDP Chat client and server on localhost
 
 import argparse, socket, sys, time, os
 from threading import Thread
@@ -15,7 +15,10 @@ def server(port):
     client_list = []
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.bind(('127.0.0.1', port))
+    print('='*33)
+    print('UDP Chat server by suShinGG')
     print('Listening at {}'.format(sock.getsockname()))
+    print('='*33)
     while True:
         data, address = sock.recvfrom(MAX_BYTES)
         text = data.decode('utf-8')
@@ -43,6 +46,9 @@ def client(port):
     Thread(target=recv, args=(sock,port,)).start()
 
 def send(sock,port):
+    print('='*27)
+    print('UDP Chat client by suShinGG')
+    print('='*27)
     name = input('your name: ')
     for x in range (0,5):#forfun
         b = "Loading" + "." * x
@@ -57,7 +63,7 @@ def send(sock,port):
         textz = name+":send:"+text
         data = textz.encode('utf-8')
         sock.sendto(data, ('127.0.0.1', port))
-        #print('The OS assigned me the address {}'.format(sock.getsockname()))
+
 
 def recv(sock,port):
     while True:
@@ -67,7 +73,7 @@ def recv(sock,port):
 
 if __name__ == '__main__':
         choices = {'client': client, 'server': server}
-        parser = argparse.ArgumentParser(description='UDP chat server/client')
+        parser = argparse.ArgumentParser(description='UDP chat server/client By suShinGG')
         parser.add_argument('role', choices=choices, help='which role to play')
         parser.add_argument('-p', metavar='PORT', type=int, default=1060,
                             help='UDP port (default 1060)')
